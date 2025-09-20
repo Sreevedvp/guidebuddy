@@ -68,10 +68,14 @@ export default function App() {
     );
   }
 
+  const handleApiKeySet = () => {
+    setHasApiKey(true);
+  };
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <AppNavigator hasApiKey={hasApiKey} />
+        <AppNavigator hasApiKey={hasApiKey} onApiKeySet={handleApiKeySet} />
       </NavigationContainer>
       <StatusBar style="auto" />
     </SafeAreaProvider>

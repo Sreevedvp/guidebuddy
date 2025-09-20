@@ -7,7 +7,11 @@ import { COLORS, SPACING, BORDER_RADIUS } from '../../constants';
 import { geminiService } from '../../services/ai/geminiService';
 import { storageService } from '../../services/storage/storageService';
 
-const OnboardingScreen: React.FC = () => {
+interface OnboardingScreenProps {
+  onApiKeySet: () => void;
+}
+
+const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onApiKeySet }) => {
   const [apiKey, setApiKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,7 +25,7 @@ const OnboardingScreen: React.FC = () => {
     try {
       await geminiService.setApiKey(apiKey.trim());
       await storageService.setOnboardingCompleted(true);
-      // The app will automatically refresh and show the main interface
+      onApiKeySet();
     } catch (error) {
       Alert.alert('Error', 'Failed to save API key. Please try again.');
       console.error('API key save error:', error);

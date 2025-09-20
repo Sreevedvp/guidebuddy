@@ -25,6 +25,7 @@ const Drawer = createDrawerNavigator();
 
 interface AppNavigatorProps {
   hasApiKey: boolean;
+  onApiKeySet: () => void;
 }
 
 // Tab Navigator for mobile
@@ -128,7 +129,7 @@ const RootStackNavigator = () => {
 };
 
 // Main App Navigator
-const AppNavigator: React.FC<AppNavigatorProps> = ({ hasApiKey }) => {
+const AppNavigator: React.FC<AppNavigatorProps> = ({ hasApiKey, onApiKeySet }) => {
   // If no API key, show onboarding
   if (!hasApiKey) {
     return (
@@ -138,10 +139,9 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ hasApiKey }) => {
           contentStyle: { backgroundColor: COLORS.WHITE }
         }}
       >
-        <Stack.Screen 
-          name="Onboarding" 
-          component={OnboardingScreen}
-        />
+        <Stack.Screen name="Onboarding">
+          {(props) => <OnboardingScreen {...props} onApiKeySet={onApiKeySet} />}
+        </Stack.Screen>
       </Stack.Navigator>
     );
   }
