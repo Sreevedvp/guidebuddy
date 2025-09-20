@@ -1,4 +1,5 @@
 import { ResponsiveBreakpoints } from '../types';
+import { COLORS as THEME_COLORS, FONTS as THEME_FONTS } from './theme';
 
 // Theme Configuration - Notion-inspired design
 export const COLORS = {
@@ -42,12 +43,23 @@ export const COLORS = {
   }
 };
 
+export const THEME = {
+  light: {
+    ...COLORS,
+    ...THEME_COLORS.light,
+  },
+  dark: {
+    ...COLORS,
+    ...THEME_COLORS.dark,
+  }
+};
+
 // Typography
 export const TYPOGRAPHY = {
   FONT_FAMILY: {
-    REGULAR: 'System',
-    MEDIUM: 'System',
-    BOLD: 'System',
+    REGULAR: THEME_FONTS.primary,
+    MEDIUM: THEME_FONTS.primary,
+    BOLD: THEME_FONTS.primary,
   },
   FONT_SIZE: {
     XS: 12,
@@ -316,7 +328,7 @@ export const FEATURE_FLAGS = {
   VOICE_INPUT: true,
   COLLABORATION: false, // Phase 2 feature
   ANALYTICS: false, // Phase 2 feature
-  DARK_MODE: false, // Phase 2 feature
+  DARK_MODE: true, // Phase 2 feature
 };
 
 export default {
