@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // Import navigation components
@@ -13,16 +13,17 @@ import { geminiService } from './src/services/ai/geminiService';
 
 // Import utilities
 import { isWeb } from './src/utils/platform';
-import { COLORS } from './src/constants';
+import { THEME } from './src/constants';
 
 // Import components
-import LoadingScreen from './src/components/common/LoadingScreen';
 import AdaptiveView from './src/components/adaptive/AdaptiveView';
 import AdaptiveText from './src/components/adaptive/AdaptiveText';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasApiKey, setHasApiKey] = useState(false);
+  const colorScheme = useColorScheme();
+  const theme = THEME[colorScheme || 'light'];
 
   useEffect(() => {
     initializeApp();
@@ -58,12 +59,12 @@ export default function App() {
   if (isLoading) {
     return (
       <SafeAreaProvider>
-        <AdaptiveView fullHeight centered backgroundColor={COLORS.LIGHT_GRAY}>
-          <AdaptiveText variant="h2" color={COLORS.TEXT_SECONDARY}>
+        <AdaptiveView fullHeight centered backgroundColor={theme.colors.gray}>
+          <AdaptiveText variant="h2" color={theme.colors.textGray}>
             Loading AI Project Planner...
           </AdaptiveText>
         </AdaptiveView>
-        <StatusBar style="auto" />
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       </SafeAreaProvider>
     );
   }
@@ -77,7 +78,7 @@ export default function App() {
       <NavigationContainer>
         <AppNavigator hasApiKey={hasApiKey} onApiKeySet={handleApiKeySet} />
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
     </SafeAreaProvider>
   );
 }
@@ -85,6 +86,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.WHITE,
   },
 });

@@ -1,65 +1,72 @@
 import { ResponsiveBreakpoints } from '../types';
-import { COLORS as THEME_COLORS, FONTS as THEME_FONTS } from './theme';
 
-// Theme Configuration - Notion-inspired design
-export const COLORS = {
-  // Primary colors
-  WHITE: '#FFFFFF',
-  LIGHT_GRAY: '#F7F6F3',
-  BORDER_GRAY: '#EBECED',
+const lightColors = {
+  background: '#FFFFFF',
+  white: '#FFFFFF',
+  text: '#373530',
+  gray: '#F1F1EF',
+  brown: '#F3EEEE',
+  orange: '#F8ECDF',
+  yellow: '#FAF3DD',
+  green: '#EEF3ED',
+  blue: '#487CA5', // Using the darker blue for accents
+  purple: '#F6F3F8',
+  pink: '#F9F2F5',
+  red: '#FAECEC',
+  textGray: '#787774',
+  textBrown: '#976D57',
+  textOrange: '#CC782F',
+  textYellow: '#C29343',
+  textGreen: '#548164',
+  textBlue: '#487CA5',
+  textPurple: '#8A67AB',
+  textPink: '#B35488',
+  textRed: '#C4554D',
+  // Specific constants that were used before
   ACCENT_BLUE: '#2383E2',
   TEXT_PRIMARY: '#2F3437',
   TEXT_SECONDARY: '#787774',
-  
-  // Status colors
-  SUCCESS: '#00B865',
-  WARNING: '#F59E0B',
-  ERROR: '#EF4444',
-  INFO: '#3B82F6',
-  
-  // Priority colors
-  PRIORITY_LOW: '#10B981',
-  PRIORITY_MEDIUM: '#F59E0B',
-  PRIORITY_HIGH: '#EF4444',
-  
-  // Phase colors
-  PHASE_PLANNING: '#8B5CF6',
-  PHASE_DEVELOPMENT: '#3B82F6',
-  PHASE_TESTING: '#F59E0B',
-  PHASE_DEPLOYMENT: '#10B981',
-  
-  // Background variations
-  BACKGROUND_LIGHT: '#FAFAFA',
-  BACKGROUND_CARD: '#FFFFFF',
-  BACKGROUND_OVERLAY: 'rgba(0, 0, 0, 0.5)',
-  
-  // Dark mode (optional for future implementation)
-  DARK: {
-    BACKGROUND: '#1A1A1A',
-    SURFACE: '#2D2D2D',
-    TEXT_PRIMARY: '#FFFFFF',
-    TEXT_SECONDARY: '#A1A1AA',
-    BORDER: '#404040',
-  }
+  BORDER_GRAY: '#EBECED',
 };
 
-export const THEME = {
-  light: {
-    ...COLORS,
-    ...THEME_COLORS.light,
-  },
-  dark: {
-    ...COLORS,
-    ...THEME_COLORS.dark,
-  }
+const darkColors = {
+  background: '#191919',
+  text: '#D4D4D4',
+  gray: '#252525',
+  brown: '#2E2724',
+  orange: '#36291F',
+  yellow: '#372E20',
+  green: '#242B26',
+  blue: '#447ACB', // Using the lighter blue for accents
+  purple: '#2A2430',
+  pink: '#2E2328',
+  red: '#332523',
+  textGray: '#9B9B9B',
+  textBrown: '#A27763',
+  textOrange: '#CB7B37',
+  textYellow: '#C19138',
+  textGreen: '#4F9768',
+  textBlue: '#447ACB',
+  textPurple: '#865DBB',
+  textPink: '#BA4A78',
+  textRed: '#BE524B',
+  // Specific constants that were used before
+  ACCENT_BLUE: '#447ACB',
+  TEXT_PRIMARY: '#D4D4D4',
+  TEXT_SECONDARY: '#9B9B9B',
+  BORDER_GRAY: '#404040',
 };
 
-// Typography
+export const FONTS = {
+  primary: 'Lato, sans-serif',
+  monospace: 'monospace',
+};
+
 export const TYPOGRAPHY = {
   FONT_FAMILY: {
-    REGULAR: THEME_FONTS.primary,
-    MEDIUM: THEME_FONTS.primary,
-    BOLD: THEME_FONTS.primary,
+    REGULAR: FONTS.primary,
+    MEDIUM: FONTS.primary,
+    BOLD: FONTS.primary,
   },
   FONT_SIZE: {
     XS: 12,
@@ -77,7 +84,6 @@ export const TYPOGRAPHY = {
   }
 };
 
-// Spacing
 export const SPACING = {
   XS: 4,
   SM: 8,
@@ -87,6 +93,23 @@ export const SPACING = {
   XXL: 48,
   XXXL: 64,
 };
+
+export const THEME = {
+  light: {
+    colors: lightColors,
+    fonts: TYPOGRAPHY.FONT_FAMILY,
+    fontSizes: TYPOGRAPHY.FONT_SIZE,
+    spacing: SPACING,
+  },
+  dark: {
+    colors: darkColors,
+    fonts: TYPOGRAPHY.FONT_FAMILY,
+    fontSizes: TYPOGRAPHY.FONT_SIZE,
+    spacing: SPACING,
+  },
+};
+
+// ... (rest of the constants from the original index.ts)
 
 // Responsive Breakpoints
 export const BREAKPOINTS: ResponsiveBreakpoints = {
@@ -276,10 +299,10 @@ export const CALENDAR_CONFIG = {
     END: 24 * 60, // 24:00
   },
   COLORS: {
-    TASK: COLORS.ACCENT_BLUE,
-    MILESTONE: COLORS.SUCCESS,
-    DEADLINE: COLORS.ERROR,
-    MEETING: COLORS.WARNING,
+    TASK: lightColors.ACCENT_BLUE,
+    MILESTONE: '#00B865',
+    DEADLINE: '#EF4444',
+    MEETING: '#F59E0B',
   },
 };
 
@@ -332,7 +355,7 @@ export const FEATURE_FLAGS = {
 };
 
 export default {
-  COLORS,
+  THEME,
   TYPOGRAPHY,
   SPACING,
   BREAKPOINTS,

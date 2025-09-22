@@ -3,13 +3,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
+import { useColorScheme } from 'react-native';
 
 // Import types
 import { RootStackParamList, TabParamList } from '../types';
 
 // Import utilities
 import { navigationUtils, useResponsive, isWeb } from '../utils/platform';
-import { COLORS } from '../constants';
+import { THEME } from '../constants';
 
 // Import screens (we'll create these next)
 import HomeScreen from '../screens/home/HomeScreen';
@@ -30,7 +31,9 @@ interface AppNavigatorProps {
 // Tab Navigator for mobile
 const TabNavigator = () => {
   const { screenSize } = useResponsive();
-  
+  const colorScheme = useColorScheme();
+  const theme = THEME[colorScheme || 'light'];
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -43,19 +46,17 @@ const TabNavigator = () => {
             iconName = focused ? 'list' : 'list-outline';
           } else if (route.name === 'Calendar') {
             iconName = focused ? 'calendar' : 'calendar-outline';
-          } else if (route.name === 'Profile') {
-            iconName = focused ? 'person' : 'person-outline';
           } else {
             iconName = 'ellipse';
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: COLORS.light.blue,
-        tabBarInactiveTintColor: COLORS.light.textGray,
+        tabBarActiveTintColor: theme.colors.blue,
+        tabBarInactiveTintColor: theme.colors.textGray,
         tabBarStyle: {
-          backgroundColor: COLORS.light.white,
-          borderTopColor: COLORS.light.gray,
+          backgroundColor: theme.colors.background,
+          borderTopColor: theme.colors.gray,
           paddingBottom: screenSize === 'mobile' ? 8 : 0,
           height: screenSize === 'mobile' ? 60 : 50,
         },
@@ -83,6 +84,9 @@ const TabNavigator = () => {
 
 // Root Stack Navigator that contains tabs and modal screens
 const RootStackNavigator = () => {
+  const colorScheme = useColorScheme();
+  const theme = THEME[colorScheme || 'light'];
+
   return (
     <Stack.Navigator 
       screenOptions={{
@@ -101,9 +105,9 @@ const RootStackNavigator = () => {
           headerShown: true,
           title: 'Create New Plan',
           headerStyle: {
-            backgroundColor: COLORS.light.white,
+            backgroundColor: theme.colors.background,
           },
-          headerTintColor: COLORS.light.text,
+          headerTintColor: theme.colors.text,
         }}
       />
       <Stack.Screen 
@@ -113,9 +117,9 @@ const RootStackNavigator = () => {
           headerShown: true,
           title: 'Project Details',
           headerStyle: {
-            backgroundColor: COLORS.light.white,
+            backgroundColor: theme.colors.background,
           },
-          headerTintColor: COLORS.light.text,
+          headerTintColor: theme.colors.text,
         }}
       />
     </Stack.Navigator>
@@ -124,13 +128,16 @@ const RootStackNavigator = () => {
 
 // Main App Navigator
 const AppNavigator: React.FC<AppNavigatorProps> = ({ hasApiKey, onApiKeySet }) => {
+  const colorScheme = useColorScheme();
+  const theme = THEME[colorScheme || 'light'];
+
   // If no API key, show onboarding
   if (!hasApiKey) {
     return (
       <Stack.Navigator 
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: COLORS.light.white }
+          contentStyle: { backgroundColor: theme.colors.background }
         }}
       >
         <Stack.Screen name="Onboarding">
