@@ -4,7 +4,7 @@ import { Calendar, DateData } from 'react-native-calendars';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import AdaptiveView from '../../components/adaptive/AdaptiveView';
 import AdaptiveText from '../../components/adaptive/AdaptiveText';
-import { THEME } from '../../constants';
+import { COLORS, FONTS } from '../../constants';
 import { storageService } from '../../services/storage/storageService';
 import { ProjectPlan } from '../../types';
 import { format } from 'date-fns';
@@ -12,7 +12,7 @@ import { format } from 'date-fns';
 const CalendarScreen: React.FC = () => {
   const [markedDates, setMarkedDates] = useState({});
   const colorScheme = useColorScheme();
-  const theme = THEME[colorScheme] || THEME.light;
+  const theme = COLORS[colorScheme || 'light'];
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -63,9 +63,9 @@ const CalendarScreen: React.FC = () => {
             arrowColor: theme.blue,
             monthTextColor: theme.text,
             indicatorColor: theme.blue,
-            textDayFontFamily: THEME.light.TYPOGRAPHY.FONT_FAMILY.REGULAR,
-            textMonthFontFamily: THEME.light.TYPOGRAPHY.FONT_FAMILY.REGULAR,
-            textDayHeaderFontFamily: THEME.light.TYPOGRAPHY.FONT_FAMILY.REGULAR,
+            textDayFontFamily: FONTS.primary,
+            textMonthFontFamily: FONTS.primary,
+            textDayHeaderFontFamily: FONTS.primary,
             textDayFontWeight: '300',
             textMonthFontWeight: 'bold',
             textDayHeaderFontWeight: '300',

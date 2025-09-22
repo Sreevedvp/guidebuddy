@@ -61,3 +61,9 @@ export const FONT_SIZES = {
   body: 16,
   caption: 12,
 };
+
+export const TYPOGRAPHY = {
+    FONT_FAMILY: {
+        REGULAR: 'Lato, sans-serif',
+    },
+};

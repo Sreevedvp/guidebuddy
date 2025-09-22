@@ -16,7 +16,6 @@ import HomeScreen from '../screens/home/HomeScreen';
 import CreatePlanScreen from '../screens/plan/CreatePlanScreen';
 import PlanDetailsScreen from '../screens/plan/PlanDetailsScreen';
 import CalendarScreen from '../screens/calendar/CalendarScreen';
-import SettingsScreen from '../screens/settings/SettingsScreen';
 import OnboardingScreen from '../screens/onboarding/OnboardingScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -52,11 +51,11 @@ const TabNavigator = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: COLORS.ACCENT_BLUE,
-        tabBarInactiveTintColor: COLORS.TEXT_SECONDARY,
+        tabBarActiveTintColor: COLORS.light.blue,
+        tabBarInactiveTintColor: COLORS.light.textGray,
         tabBarStyle: {
-          backgroundColor: COLORS.WHITE,
-          borderTopColor: COLORS.BORDER_GRAY,
+          backgroundColor: COLORS.light.white,
+          borderTopColor: COLORS.light.gray,
           paddingBottom: screenSize === 'mobile' ? 8 : 0,
           height: screenSize === 'mobile' ? 60 : 50,
         },
@@ -76,11 +75,6 @@ const TabNavigator = () => {
       <Tab.Screen 
         name="Calendar" 
         component={CalendarScreen} 
-      />
-      <Tab.Screen 
-        name="Profile" 
-        component={SettingsScreen} 
-        options={{ title: 'Settings' }}
       />
     </Tab.Navigator>
   );
@@ -107,9 +101,9 @@ const RootStackNavigator = () => {
           headerShown: true,
           title: 'Create New Plan',
           headerStyle: {
-            backgroundColor: COLORS.WHITE,
+            backgroundColor: COLORS.light.white,
           },
-          headerTintColor: COLORS.TEXT_PRIMARY,
+          headerTintColor: COLORS.light.text,
         }}
       />
       <Stack.Screen 
@@ -119,9 +113,9 @@ const RootStackNavigator = () => {
           headerShown: true,
           title: 'Project Details',
           headerStyle: {
-            backgroundColor: COLORS.WHITE,
+            backgroundColor: COLORS.light.white,
           },
-          headerTintColor: COLORS.TEXT_PRIMARY,
+          headerTintColor: COLORS.light.text,
         }}
       />
     </Stack.Navigator>
@@ -136,7 +130,7 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ hasApiKey, onApiKeySet }) =
       <Stack.Navigator 
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: COLORS.WHITE }
+          contentStyle: { backgroundColor: COLORS.light.white }
         }}
       >
         <Stack.Screen name="Onboarding">
